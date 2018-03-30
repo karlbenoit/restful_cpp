@@ -1,0 +1,41 @@
+cmake_minimum_required(VERSION 3.9)
+include(ExternalProject)
+
+ExternalProject_Add(
+  Wt
+
+  GIT_REPOSITORY "https://github.com/emweb/wt.git"
+  GIT_TAG "master"
+
+  UPDATE_COMMAND ""
+  PATCH_COMMAND ""
+
+  SOURCE_DIR "${CMAKE_SOURCE_DIR}/3rdparty/wt"
+  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/wt/install
+    -DBUILD_EXAMPLES=OFF
+    -DINSTALL_DOCUMENTATION=OFF
+    -DINSTALL_RESOURCES=OFF
+    -DENABLE_HARU=OFF
+    -DENABLE_PANGO=OFF
+    -DENABLE_EXT=OFF
+    -DENABLE_SQLITE=OFF
+    -DENABLE_POSTGRES=OFF
+    -DENABLE_FIREBIRD=OFF
+    -DENABLE_MYSQL=OFF
+    -DENABLE_MSSQLSERVER=OFF
+    -DENABLE_QT4=OFF
+    -DENABLE_LIBWTTEST=OFF
+    -DENABLE_LIBWTDBO=OFF
+    -DWT_NO_STD_LOCALE=OFF
+    -DWT_NO_STD_LOCALE=OFF
+    -DINSTALL_EXTENSIONLESS_HEADERS=OFF
+    -DENABLE_OPENGL=OFF
+    -DENABLE_UNWIND=OFF
+
+  TEST_COMMAND ""
+)
+
+ExternalProject_Get_Property(Wt install_dir)
+
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/wt/install/include)
+link_directories(${CMAKE_CURRENT_BINARY_DIR}/wt/install/lib)
